@@ -57,6 +57,17 @@ public class Timer : MonoBehaviour
         {
             _gameOver = true;
             OnGameOver?.Invoke();
+            UIPopup.Instance.Show("You lose! You didn't make it in time", index =>
+            {
+                if (index == 0)
+                {
+                    LevelManager.Instance.LoadMenu();
+                }
+                else
+                {
+                    LevelManager.Instance.LoadLevel(1);
+                }
+            }, "Main Menù", "Retry");
         } 
     }
 }
