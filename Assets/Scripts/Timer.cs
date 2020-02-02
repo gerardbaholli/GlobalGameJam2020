@@ -57,10 +57,6 @@ public class Timer : MonoBehaviour
         {
             _gameOver = true;
             OnGameOver?.Invoke();
-            UIPopup.Instance.Show("You lose! The time is over ", index =>
-            {
-                Debug.Log(index);
-            }, "Main menù", "Retry");
         } 
     }
 }
