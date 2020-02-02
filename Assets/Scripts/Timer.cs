@@ -61,11 +61,11 @@ public class Timer : MonoBehaviour
             {
                 if (index == 0)
                 {
-                    LevelManager.Instance.LoadMenu();
+                    LevelManager.LoadMenu();
                 }
                 else
                 {
-                    LevelManager.Instance.LoadLevel(1);
+                    LevelManager.LoadLevel(1);
                 }
             }, "Main Menù", "Retry");
         } 

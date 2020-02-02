@@ -16,11 +16,11 @@ public class BugContainer : MonoBehaviour
             {
                 if (index == 0)
                 {
-                    LevelManager.Instance.LoadMenu();
+                    LevelManager.LoadMenu();
                 }
                 else
                 {
-                    LevelManager.Instance.LoadLevel(2);
+                    LevelManager.LoadLevel(2);
                 }
             }, "Main Menù", "Next");
         }
