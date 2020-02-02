@@ -33,7 +33,7 @@ public class CharacterMovementController : MonoBehaviour
         if (Physics2D.BoxCast(newPosition, _boxSize, 0f, Vector2.zero, 0f, _layerMask).collider == null)
         {
             var screenPosition = _camera.WorldToViewportPoint(newPosition);
-            screenPosition.x = Mathf.Clamp01(screenPosition.x);
+            screenPosition.x = Mathf.Clamp(screenPosition.x, 0f, 0.925f);
             screenPosition.y = Mathf.Clamp01(screenPosition.y);
             newPosition = _camera.ViewportToWorldPoint(screenPosition);
             _rigidbody2D.MovePosition(newPosition);

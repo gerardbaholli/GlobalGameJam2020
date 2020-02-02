@@ -41,9 +41,9 @@ public class BugMovementController : MonoBehaviour
 
         Vector2 newPosition = _rigidbody2D.position + (Vector2) transform.up * speed;
         var screenPosition = _camera.WorldToViewportPoint(newPosition);
-        screenPosition.x = screenPosition.x > 1 ? screenPosition.x - 1 : screenPosition.x;
+        screenPosition.x = screenPosition.x > 0.925f ? screenPosition.x - 0.925f : screenPosition.x;
         screenPosition.y = screenPosition.y > 1 ? screenPosition.y - 1 : screenPosition.y;
-        screenPosition.x = screenPosition.x < 0 ? screenPosition.x + 1 : screenPosition.x;
+        screenPosition.x = screenPosition.x < 0 ? screenPosition.x + 0.925f : screenPosition.x;
         screenPosition.y = screenPosition.y < 0 ? screenPosition.y + 1 : screenPosition.y;
         newPosition = _camera.ViewportToWorldPoint(screenPosition);
         _rigidbody2D.MovePosition(newPosition);
