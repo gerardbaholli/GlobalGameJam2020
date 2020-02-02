@@ -1,15 +1,20 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class KillController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody2D;
+    [Header("Audio"),SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip kill;
+    [SerializeField] private AudioClip miss;
 
     private Vector2 _boxSize;
 
     private void Reset()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Awake()
@@ -26,6 +31,11 @@ public class KillController : MonoBehaviour
             if (hit.collider != null)
             {
                 Destroy(hit.transform.gameObject);
+                _audioSource.PlayOneShot(kill);
+            }
+            else
+            {
+                _audioSource.PlayOneShot(miss);
             }
         }
     }

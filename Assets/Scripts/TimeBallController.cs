@@ -11,6 +11,8 @@ public class TimeBallController : MonoBehaviour
 
     [SerializeField] private Image _image;
 
+    public bool IsEnabled => _image.sprite.Equals(enabled);
+
     private void Reset()
     {
         _image = GetComponent<Image>();

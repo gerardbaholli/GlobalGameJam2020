@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
     private bool _gameOver;
 
     public UnityEvent OnGameOver = new UnityEvent();
+    public UnityEvent OnBallDisabled = new UnityEvent();
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -52,7 +53,11 @@ public class Timer : MonoBehaviour
         if (_elapsedTime > _timePerBall)
         {
             var index = (int) (_elapsedTime / _timePerBall) - 1;
-            _ballControllers[index].Disable();
+            if (_ballControllers[index].IsEnabled)
+            {
+                _ballControllers[index].Disable();
+                OnBallDisabled?.Invoke();
+            }
         }
 
         if (totalTime <= _elapsedTime)
