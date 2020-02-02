@@ -9,6 +9,7 @@ public class CharacterMovementController : MonoBehaviour
     private LayerMask _layerMask;
     private Vector2 _boxSize;
     private Camera _camera;
+    private bool _movementEnabled = true;
 
     private void Reset()
     {
@@ -24,6 +25,9 @@ public class CharacterMovementController : MonoBehaviour
 
     private void Update()
     {
+        if (!_movementEnabled)
+            return;
+
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 newPosition = _rigidbody2D.position + input * speed;
         if (Physics2D.BoxCast(newPosition, _boxSize, 0f, Vector2.zero, 0f, _layerMask).collider == null)
@@ -34,5 +38,10 @@ public class CharacterMovementController : MonoBehaviour
             newPosition = _camera.ViewportToWorldPoint(screenPosition);
             _rigidbody2D.MovePosition(newPosition);
         }
+    }
+
+    public void EnableMovement(bool enabled)
+    {
+        _movementEnabled = enabled;
     }
 }

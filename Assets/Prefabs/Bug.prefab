@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 5021973864712868941}
   speed: 0.1
-  straightLine: 1.4
+  straightLine: 2
 --- !u!212 &5021973864712868940
 SpriteRenderer:
   m_ObjectHideFlags: 0

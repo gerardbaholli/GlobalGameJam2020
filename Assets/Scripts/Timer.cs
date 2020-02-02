@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
 
     public UnityEvent OnGameOver = new UnityEvent();
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (timeBallPrefab == null || transform.childCount == numberOfBalls)
@@ -33,6 +34,7 @@ public class Timer : MonoBehaviour
             Instantiate(timeBallPrefab, transform);
         }
     }
+#endif
 
     private void Start()
     {
@@ -42,7 +44,7 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        if(_gameOver)
+        if (_gameOver)
             return;
 
         _elapsedTime += Time.deltaTime;
@@ -52,7 +54,7 @@ public class Timer : MonoBehaviour
             var index = (int) (_elapsedTime / _timePerBall) - 1;
             _ballControllers[index].Disable();
         }
-        
+
         if (totalTime <= _elapsedTime)
         {
             _gameOver = true;
@@ -68,6 +70,11 @@ public class Timer : MonoBehaviour
                     LevelManager.LoadLevel(1);
                 }
             }, "Main Menù", "Retry");
-        } 
+        }
+    }
+
+    public void GameOver()
+    {
+        _gameOver = true;
     }
 }

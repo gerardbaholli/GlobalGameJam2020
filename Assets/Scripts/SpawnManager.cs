@@ -9,7 +9,8 @@ public class SpawnManager : MonoBehaviour
     {
         foreach (Transform childTransform in transform)
         {
-            _container.InstantiateBug(childTransform.position);
+            if(childTransform.gameObject.activeInHierarchy)
+                _container.InstantiateBug(childTransform.position);
         }
     }
 }
