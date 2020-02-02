@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
@@ -11,6 +11,8 @@ public class Timer : MonoBehaviour
     private float _elapsedTime;
     private float _timePerBall;
     private bool _gameOver;
+
+    public UnityEvent OnGameOver = new UnityEvent();
 
     private void OnValidate()
     {
@@ -54,7 +56,11 @@ public class Timer : MonoBehaviour
         if (totalTime <= _elapsedTime)
         {
             _gameOver = true;
-            // GameEnd
+            OnGameOver?.Invoke();
+            UIPopup.Instance.Show("You lose! The time is over ", index =>
+            {
+                Debug.Log(index);
+            }, "Main menù", "Retry");
         } 
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterMovementController : MonoBehaviour
@@ -23,7 +22,7 @@ public class CharacterMovementController : MonoBehaviour
 
     private void Update()
     {
-        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 newPosition = _rigidbody2D.position + input * speed;
         if (Physics2D.BoxCast(newPosition, _boxSize, 0f, Vector2.zero, 0f, _layerMask).collider == null)
         {
