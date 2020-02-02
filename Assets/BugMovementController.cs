@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BugMovementController : MonoBehaviour
 {
@@ -8,11 +10,16 @@ public class BugMovementController : MonoBehaviour
     
     private float _lastRotationUpdate;
     private float rotation;
-    
+    private Camera _camera;
 
     private void Reset()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
+    private void Awake()
+    {
+        _camera = Camera.main;
     }
 
     void Update()
@@ -25,6 +32,10 @@ public class BugMovementController : MonoBehaviour
         }
 
         Vector2 newPosition = _rigidbody2D.position + (Vector2) transform.up * speed;
+        var screenPosition = _camera.WorldToViewportPoint(newPosition);
+        screenPosition.x = Mathf.Clamp01(screenPosition.x);
+        screenPosition.y = Mathf.Clamp01(screenPosition.y);
+        newPosition = _camera.ViewportToWorldPoint(screenPosition);
         _rigidbody2D.MovePosition(newPosition);
     }
 }

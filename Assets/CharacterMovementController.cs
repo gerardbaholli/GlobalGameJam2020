@@ -8,6 +8,7 @@ public class CharacterMovementController : MonoBehaviour
 
     private LayerMask _layerMask;
     private Vector2 _boxSize;
+    private Camera _camera;
 
     private void Reset()
     {
@@ -18,6 +19,7 @@ public class CharacterMovementController : MonoBehaviour
     {
         _layerMask = Physics2D.GetLayerCollisionMask(gameObject.layer);
         _boxSize = new Vector2(1f, 2f) * gameObject.transform.localScale;
+        _camera = Camera.main;
     }
 
     private void Update()
@@ -26,6 +28,10 @@ public class CharacterMovementController : MonoBehaviour
         Vector2 newPosition = _rigidbody2D.position + input * speed;
         if (Physics2D.BoxCast(newPosition, _boxSize, 0f, Vector2.zero, 0f, _layerMask).collider == null)
         {
+            var screenPosition = _camera.WorldToViewportPoint(newPosition);
+            screenPosition.x = Mathf.Clamp01(screenPosition.x);
+            screenPosition.y = Mathf.Clamp01(screenPosition.y);
+            newPosition = _camera.ViewportToWorldPoint(screenPosition);
             _rigidbody2D.MovePosition(newPosition);
         }
     }
